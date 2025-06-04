@@ -1,4 +1,10 @@
 import { useState } from "react";
+
+// icons
+import { VscEye } from "react-icons/vsc";
+import { VscEyeClosed } from "react-icons/vsc";
+// icons
+
 import { signInWithPopup } from "firebase/auth";
 import { auth, provider } from "../../firebase";
 import googleIcon from "./google-brand.png";
@@ -6,6 +12,9 @@ import style from "./registration.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 const Registration = () => {
+  const [hidden, setHidden] = useState(false);
+  const [open, setOpen] = useState(false);
+
   const navigate = useNavigate();
   const [register, setRegister] = useState({
     username: "",
@@ -106,23 +115,44 @@ const Registration = () => {
           placeholder="Email"
         />
 
-        <input
-          type="text"
-          required
-          name="password"
-          value={register?.password}
-          onChange={handleChange}
-          placeholder="Parol"
-        />
+        <div className={style.inputBox}>
+          <input
+            type={open ? "text" : "password"}
+            required
+            name="password"
+            value={register?.password}
+            onChange={handleChange}
+            placeholder="Parol"
+          />
 
-        <input
-          type="text"
-          required
-          name="password2"
-          value={register?.password2}
-          onChange={handleChange}
-          placeholder="Parolni tasdiqlash"
-        />
+          {open ? (
+            <VscEyeClosed
+              onClick={() => setOpen(!open)}
+              className={style.icon}
+            />
+          ) : (
+            <VscEye onClick={() => setOpen(!open)} className={style.icon} />
+          )}
+        </div>
+
+        <div className={style.inputBox}>
+          <input
+            type={hidden ? "text" : "password"}
+            required
+            name="password2"
+            value={register?.password2}
+            onChange={handleChange}
+            placeholder="Parolni tasdiqlash"
+          />
+          {hidden ? (
+            <VscEyeClosed
+              onClick={() => setHidden(!hidden)}
+              className={style.icon}
+            />
+          ) : (
+            <VscEye onClick={() => setHidden(!hidden)} className={style.icon} />
+          )}
+        </div>
 
         <button type="submit">Registratsiyadan o'tish</button>
       </form>

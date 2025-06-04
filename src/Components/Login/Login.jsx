@@ -1,9 +1,14 @@
 import { useRef, useState } from "react";
 import style from "./login.module.scss";
+// icons
+import { VscEye } from "react-icons/vsc";
+import { VscEyeClosed } from "react-icons/vsc";
+// icons
 import axios from "axios";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const [open, setOpen] = useState(false);
   const emailRef = useRef();
   const parolRef = useRef();
   const navigate = useNavigate();
@@ -75,7 +80,22 @@ const Login = () => {
       <h1>Kirish</h1>
       <form onSubmit={handleSubmit} className={style["form-validation"]}>
         <input ref={emailRef} placeholder="Email" type="text" />
-        <input ref={parolRef} placeholder="Parol" type="text" />
+
+        <div className={style.inputBox}>
+          <input
+            ref={parolRef}
+            placeholder="Parol"
+            type={open ? "text" : "password"}
+          />
+          {open ? (
+            <VscEyeClosed
+              onClick={() => setOpen(!open)}
+              className={style.icon}
+            />
+          ) : (
+            <VscEye onClick={() => setOpen(!open)} className={style.icon} />
+          )}
+        </div>
 
         <button type="submit">Kirish</button>
 

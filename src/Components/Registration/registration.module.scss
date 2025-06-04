@@ -61,6 +61,7 @@
     }
 
     input {
+      width: 100%;
       &:focus {
         border-color: #29a2d7;
         transition: all 0.4s ease-in-out;
@@ -89,6 +90,19 @@
       text-align: right;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       display: block;
+    }
+
+    .inputBox {
+      position: relative;
+      .icon {
+        position: absolute;
+        right: 10px;
+        font-size: 26px;
+        cursor: pointer;
+        color: white;
+        top: 50%;
+        transform: translateY(-50%);
+      }
     }
   }
 

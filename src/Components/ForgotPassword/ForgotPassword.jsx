@@ -1,9 +1,17 @@
+// icons
+import { VscEye } from "react-icons/vsc";
+import { VscEyeClosed } from "react-icons/vsc";
+// icons
+
 import { useNavigate } from "react-router-dom";
 import style from "./forgotPassword.module.scss";
 import { useRef, useState } from "react";
 import axios from "axios";
 
 const ForgotPassword = () => {
+  const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
   const [error, setError] = useState(false);
   const [showCodeInput, setShowCodeInput] = useState(false);
 
@@ -143,10 +151,10 @@ const ForgotPassword = () => {
         alert("Parolingiz yangilandi ✅");
         navigate("/login");
       } else {
-        setCodeError(true); 
+        setCodeError(true);
       }
     } catch (error) {
-      setCodeError(true); 
+      setCodeError(true);
       console.log("Xatolik:", error);
       alert("Xatolik yuz berdi: " + error.message);
     }
@@ -189,22 +197,46 @@ const ForgotPassword = () => {
             <span className={style.error}>Emailingizdagi codni kiriting</span>
           )}
 
-          <input
-            ref={newParolRef}
-            placeholder="Yangi parol kiriting"
-            type="text"
-          />
+          <div className={style.inputBox}>
+            <input
+              ref={newParolRef}
+              placeholder="Yangi parol kiriting"
+              type={open ? "text" : "password"}
+            />
+            {open ? (
+              <VscEyeClosed
+                onClick={() => setOpen(!open)}
+                className={style.icon}
+              />
+            ) : (
+              <VscEye onClick={() => setOpen(!open)} className={style.icon} />
+            )}
+          </div>
+
           {newParolError && (
             <span className={style.error}>
               Yangi kod kamida 8 tadan ko'p bo'lishi kerak
             </span>
           )}
 
-          <input
-            ref={newParol2Ref}
-            placeholder="Yangi parolni qayta kiriting"
-            type="text"
-          />
+          <div className={style.inputBox}>
+            <input
+              ref={newParol2Ref}
+              placeholder="Yangi parolni qayta kiriting"
+              type={hidden ? "text" : "password"}
+            />
+            {hidden ? (
+              <VscEyeClosed
+                onClick={() => setHidden(!hidden)}
+                className={style.icon}
+              />
+            ) : (
+              <VscEye
+                onClick={() => setHidden(!hidden)}
+                className={style.icon}
+              />
+            )}
+          </div>
 
           {newParol2Error && (
             <span className={style.error}>Parollar mos emas ❌</span>
