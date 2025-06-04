@@ -9,22 +9,18 @@ const Navbar = () => {
   return (
     <div className={style.container}>
       <div className={style.navbar}>
-        <div>
-          <Link to="/">Logo</Link>
-        </div>
+        <Link to="/">Logo</Link>
 
-        <div>
-          <nav>
-            <Link to="/about">Biz haqimizda</Link>
-            <Link to="/services">Xizmatlar</Link>
-            <Link to="/contact">Aloqa</Link>
-            <Link to="/blog">Blog</Link>
-          </nav>
-        </div>
+        <nav>
+          <Link to="/about">Biz haqimizda</Link>
+          <Link to="/services">Xizmatlar</Link>
+          <Link to="/contact">Aloqa</Link>
+          <Link to="/blog">Blog</Link>
+        </nav>
 
-        <div>
-          <button className={style.logoutBtn} onClick={Logout}>Hisobdan chiqish</button>
-        </div>
+        <button className={style.logoutBtn} onClick={Logout}>
+          Hisobdan chiqish
+        </button>
       </div>
     </div>
   );
